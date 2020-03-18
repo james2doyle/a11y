@@ -2,6 +2,10 @@
 
 > A site for checking if color combinations pass AA or AAA
 
+## Screenshot
+
+![screenshot.png](screenshot.png)
+
 ## Included
 
 *TODO*
@@ -17,6 +21,7 @@ npm run serve
 
 ```
 npm run build
+npm run deploy
 ```
 
 ## License
