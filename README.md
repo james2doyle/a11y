@@ -2,6 +2,8 @@
 
 > A site for checking if color combinations pass AA or AAA
 
+[Live site](https://james2doyle.github.io/a11y/)
+
 ## Screenshot
 
 ![screenshot.png](screenshot.png)
