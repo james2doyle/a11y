@@ -1,0 +1,22 @@
+{
+  "name": "a11y",
+  "private": true,
+  "version": "0.0.1",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "NODE_ENV=production vite build",
+    "preview": "vite preview"
+  },
+  "devDependencies": {
+    "@biomejs/biome": "2.3.10",
+    "@types/alpinejs": "3.13.11",
+    "vite": "^7.3.0"
+  },
+  "dependencies": {
+    "@tailwindcss/vite": "^4.1.18",
+    "alpinejs": "^3.13.5",
+    "color": "5.0.3",
+    "tailwindcss": "^4.1.18"
+  }
+}
