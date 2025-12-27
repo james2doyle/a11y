@@ -9,131 +9,144 @@
   <style>
     [x-cloak] { display: none !important; }
   </style>
-  <script type="module" crossorigin src="/a11y/assets/index-DaWCXawf.js"></script>
-  <link rel="stylesheet" crossorigin href="/a11y/assets/index-MkGBWQfg.css">
+  <script type="module" crossorigin src="/a11y/assets/index-B2kKRbeP.js"></script>
+  <link rel="stylesheet" crossorigin href="/a11y/assets/index-CFG0JxcF.css">
 </head>
 
 <body class="bg-gray-100 text-gray-900 dark:bg-gray-900 antialiased p-4 md:p-8" x-data="contrastApp" x-cloak>
     <div class="max-w-6xl mx-auto">
-        <nav class="flex items-center justify-between mb-8">
+        <nav class="flex items-center justify-between mb-8" role="navigation" aria-label="Main navigation">
             <div class="flex items-center space-x-2">
-                <div class="size-8 bg-indigo-600 rounded-lg flex items-center justify-center text-white font-bold">A</div>
+                <div class="size-8 bg-indigo-600 rounded-lg flex items-center justify-center text-white font-bold" aria-hidden="true">A</div>
                 <h1 class="text-xl font-bold tracking-tight dark:text-gray-100">A11y Contrast Checker</h1>
             </div>
             <a href="https://www.w3.org/WAI/WCAG21/Understanding/contrast-minimum.html"
                target="_blank"
-               class="text-gray-500 dark:text-gray-300 hover:text-indigo-600 flex items-center text-sm transition-colors">
+               rel="noopener noreferrer"
+               class="text-gray-500 dark:text-gray-300 hover:text-indigo-600 flex items-center text-sm transition-colors"
+               title="WCAG Documentation (opens in new tab)">
                 WCAG Docs
-                <svg class="ml-1 size-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path></svg>
+                <svg class="ml-1 size-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path></svg>
+                <span class="sr-only">(opens in new tab)</span>
             </a>
         </nav>
 
-        <form name="control-panel" @input.debounce.1000ms="updateUrl" class="bg-white rounded-xl shadow-sm border border-gray-200 p-6 mb-8">
-            <div class="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-5 gap-6">
+        <main id="main-content">
+            <form name="control-panel" @input.debounce.1000ms="updateUrl" class="bg-white rounded-xl shadow-sm border border-gray-200 p-6 mb-8" role="search" aria-labelledby="controlPanelHeading">
+                <h2 id="controlPanelHeading" class="sr-only">Contrast Checker Controls</h2>
+                <div class="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-5 gap-6">
 
-                <div class="space-y-2">
-                    <label class="block text-xs font-bold uppercase text-gray-500 tracking-wider">Text Color</label>
-                    <div class="relative group">
-                        <input type="text" x-model="textColor" class="w-full pl-10 pr-4 py-2 border border-gray-200 rounded-lg focus:ring-2 focus:ring-indigo-500 outline-none">
-                        <div class="absolute left-2 top-1/2 -translate-y-1/2 size-6 rounded border shadow-sm" :style="`background-color: ${textColor}`"></div>
-                        <input type="color" x-model="textColor" class="absolute inset-0 opacity-0 cursor-pointer">
+                    <div class="space-y-2">
+                        <label for="textColor" class="block text-xs font-bold uppercase text-gray-500 tracking-wider">Text Color</label>
+                        <div class="relative group">
+                            <input type="text" id="textColor" x-model="textColor" aria-describedby="textColorHelp" class="w-full pl-10 pr-4 py-2 border border-gray-200 rounded-lg focus:ring-2 focus:ring-indigo-500 outline-none focus:outline-none focus:ring-offset-2">
+                            <div class="absolute left-2 top-1/2 -translate-y-1/2 size-6 rounded border shadow-sm" :style="`background-color: ${textColor}`" aria-hidden="true"></div>
+                            <input type="color" x-model="textColor" class="absolute inset-0 opacity-0 cursor-pointer" aria-label="Pick text color">
+                        </div>
+                        <p id="textColorHelp" class="sr-only">Enter a hex color code or use the color picker</p>
+                    </div>
+
+                    <div class="space-y-2">
+                        <label for="bgColor" class="block text-xs font-bold uppercase text-gray-500 tracking-wider">Background</label>
+                        <div class="relative group">
+                            <input type="text" id="bgColor" x-model="bgColor" aria-describedby="bgColorHelp" class="w-full pl-10 pr-4 py-2 border border-gray-200 rounded-lg focus:ring-2 focus:ring-indigo-500 outline-none focus:outline-none focus:ring-offset-2">
+                            <div class="absolute left-2 top-1/2 -translate-y-1/2 size-6 rounded border shadow-sm" :style="`background-color: ${bgColor}`" aria-hidden="true"></div>
+                            <input type="color" x-model="bgColor" class="absolute inset-0 opacity-0 cursor-pointer" aria-label="Pick background color">
+                        </div>
+                        <p id="bgColorHelp" class="sr-only">Enter a hex color code or use the color picker</p>
+                    </div>
+
+                    <div class="space-y-2">
+                        <label for="fontSize" class="block text-xs font-bold uppercase text-gray-500 tracking-wider">Font Size (px)</label>
+                        <input type="number" id="fontSize" x-model="fontSize" min="8" max="72" aria-describedby="fontSizeHelp" class="w-full px-4 py-2 border border-gray-200 rounded-lg focus:ring-2 focus:ring-indigo-500 outline-none focus:outline-none focus:ring-offset-2">
+                        <p id="fontSizeHelp" class="sr-only">Enter font size in pixels, range 8 to 72</p>
+                    </div>
+
+                    <div class="space-y-2">
+                        <label for="fontWeight" class="block text-xs font-bold uppercase text-gray-500 tracking-wider">Weight</label>
+                        <select id="fontWeight" x-model="fontWeight" aria-describedby="fontWeightHelp" class="w-full px-4 py-2 border border-gray-200 rounded-lg focus:ring-2 focus:ring-indigo-500 outline-none bg-white focus:outline-none focus:ring-offset-2">
+                            <option value="normal">Normal</option>
+                            <option value="bold">Bold</option>
+                        </select>
+                        <p id="fontWeightHelp" class="sr-only">Select font weight: normal or bold</p>
+                    </div>
+
+                    <div class="space-y-2">
+                        <label for="complianceLevel" class="block text-xs font-bold uppercase text-gray-500 tracking-wider">Target</label>
+                        <select id="complianceLevel" x-model="complianceLevel" aria-describedby="complianceHelp" class="w-full px-4 py-2 border border-gray-200 rounded-lg focus:ring-2 focus:ring-indigo-500 outline-none bg-white focus:outline-none focus:ring-offset-2">
+                            <option value="AA">AA (Standard)</option>
+                            <option value="AAA">AAA (High)</option>
+                        </select>
+                        <p id="complianceHelp" class="sr-only">Select WCAG compliance level: AA standard or AAA high contrast</p>
                     </div>
                 </div>
+            </form>
 
-                <div class="space-y-2">
-                    <label class="block text-xs font-bold uppercase text-gray-500 tracking-wider">Background</label>
-                    <div class="relative group">
-                        <input type="text" x-model="bgColor" class="w-full pl-10 pr-4 py-2 border border-gray-200 rounded-lg focus:ring-2 focus:ring-indigo-500 outline-none">
-                        <div class="absolute left-2 top-1/2 -translate-y-1/2 size-6 rounded border shadow-sm" :style="`background-color: ${bgColor}`"></div>
-                        <input type="color" x-model="bgColor" class="absolute inset-0 opacity-0 cursor-pointer">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+
+                <section class="rounded-xl border p-6 flex flex-col justify-between transition-all"
+                     :class="passes ? 'bg-emerald-50 border-emerald-200 text-emerald-900' : 'bg-rose-50 border-rose-200 text-rose-900'" aria-labelledby="statusHeading">
+                    <div>
+                        <div class="flex items-center justify-between mb-4">
+                            <h2 class="font-bold text-lg" id="statusHeading">Current Status</h2>
+                            <div aria-hidden="true">
+                                <template x-if="passes">
+                                    <svg class="size-6 text-emerald-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+                                </template>
+                                <template x-if="!passes">
+                                    <svg class="size-6 text-rose-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                                </template>
+                            </div>
+                        </div>
+                        <div class="space-y-2 text-sm opacity-90" aria-live="polite">
+                            <p class="flex justify-between">
+                                <span>Contrast Ratio:</span>
+                                <span class="font-mono font-bold" x-text="`${contrastRatio.toFixed(2)}:1`"></span>
+                            </p>
+                            <p class="flex justify-between">
+                                <span>Required:</span>
+                                <span class="font-mono" x-text="`${requiredRatio}:1`"></span>
+                            </p>
+                            <p class="flex justify-between items-center">
+                                <span>Text Class:</span>
+                                <span class="px-2 py-0.5 rounded text-[10px] uppercase font-bold bg-white bg-opacity-50" x-text="isLargeText ? 'Large Text' : 'Normal Text'"></span>
+                            </p>
+                        </div>
                     </div>
-                </div>
+                    <div class="mt-8 pt-6 border-t border-current border-opacity-10">
+                        <p class="p-4 rounded-lg" :style="`color: ${textColor}; background-color: ${bgColor}; font-size: ${fontSize}px; font-weight: ${fontWeight};`" x-text="sampleText" aria-label="Preview of current contrast"></p>
+                    </div>
+                </section>
 
-                <div class="space-y-2">
-                    <label class="block text-xs font-bold uppercase text-gray-500 tracking-wider">Font Size (px)</label>
-                    <input type="number" x-model="fontSize" class="w-full px-4 py-2 border border-gray-200 rounded-lg focus:ring-2 focus:ring-indigo-500 outline-none">
-                </div>
+                <section class="bg-white rounded-xl border border-gray-200 p-6 flex flex-col justify-between shadow-sm" aria-labelledby="suggestedHeading">
+                    <div>
+                        <h2 class="font-bold text-lg mb-4" id="suggestedHeading">Suggested Text</h2>
+                        <p class="text-sm text-gray-500 mb-4">A contrast-compliant version using current background.</p>
+                        <div class="flex items-center space-x-2">
+                            <div class="size-4 rounded border" :style="`background-color: ${suggestedText}`" aria-hidden="true"></div>
+                            <span class="font-mono text-xs" x-text="suggestedText"></span>
+                        </div>
+                    </div>
+                    <div class="mt-8 pt-6 border-t border-gray-100">
+                        <p class="p-4 rounded-lg" :style="`color: ${suggestedText}; background-color: ${bgColor}; font-size: ${fontSize}px; font-weight: ${fontWeight};`" x-text="sampleText" aria-label="Preview of suggested contrast"></p>
+                    </div>
+                </section>
 
-                <div class="space-y-2">
-                    <label class="block text-xs font-bold uppercase text-gray-500 tracking-wider">Weight</label>
-                    <select x-model="fontWeight" class="w-full px-4 py-2 border border-gray-200 rounded-lg focus:ring-2 focus:ring-indigo-500 outline-none bg-white">
-                        <option value="normal">Normal</option>
-                        <option value="bold">Bold</option>
-                    </select>
-                </div>
+                <section class="bg-white rounded-xl border border-gray-200 p-6 flex flex-col justify-between shadow-sm" aria-labelledby="shareHeading">
+                    <div>
+                        <h2 class="font-bold text-lg mb-4" id="shareHeading">Share</h2>
+                        <p class="text-sm text-gray-500 mb-6">Copy current configuration as a URL for sharing.</p>
+                        <button @click="copyUrl" type="button" :disabled="copying" class="w-full flex items-center justify-center space-x-2 py-3 px-4 bg-gray-900 text-white rounded-lg hover:bg-gray-800 disabled:bg-gray-800 transition-all active:scale-95 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2">
+                            <span x-text="copying ? 'Copied!' : 'Copy Share Link'" id="copyButtonText" aria-live="polite"></span>
+                        </button>
+                    </div>
+                    <div class="mt-8 text-[10px] text-gray-400 leading-relaxed uppercase tracking-wider font-bold">
+                        WCAG 2.1 Contrast standard (1.4.3)
+                    </div>
+                </section>
 
-                <div class="space-y-2">
-                    <label class="block text-xs font-bold uppercase text-gray-500 tracking-wider">Target</label>
-                    <select x-model="complianceLevel" class="w-full px-4 py-2 border border-gray-200 rounded-lg focus:ring-2 focus:ring-indigo-500 outline-none bg-white">
-                        <option value="AA">AA (Standard)</option>
-                        <option value="AAA">AAA (High)</option>
-                    </select>
-                </div>
             </div>
-        </form>
-
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-
-            <div class="rounded-xl border p-6 flex flex-col justify-between transition-all"
-                 :class="passes ? 'bg-emerald-50 border-emerald-200 text-emerald-900' : 'bg-rose-50 border-rose-200 text-rose-900'">
-                <div>
-                    <div class="flex items-center justify-between mb-4">
-                        <h2 class="font-bold text-lg">Current Status</h2>
-                        <template x-if="passes">
-                            <svg class="size-6 text-emerald-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
-                        </template>
-                        <template x-if="!passes">
-                            <svg class="size-6 text-rose-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
-                        </template>
-                    </div>
-                    <div class="space-y-2 text-sm opacity-90">
-                        <p class="flex justify-between">
-                            <span>Contrast Ratio:</span>
-                            <span class="font-mono font-bold" x-text="`${contrastRatio.toFixed(2)}:1`"></span>
-                        </p>
-                        <p class="flex justify-between">
-                            <span>Required:</span>
-                            <span class="font-mono" x-text="`${requiredRatio}:1`"></span>
-                        </p>
-                        <p class="flex justify-between items-center">
-                            <span>Text Class:</span>
-                            <span class="px-2 py-0.5 rounded text-[10px] uppercase font-bold bg-white bg-opacity-50" x-text="isLargeText ? 'Large Text' : 'Normal Text'"></span>
-                        </p>
-                    </div>
-                </div>
-                <div class="mt-8 pt-6 border-t border-current border-opacity-10">
-                    <p class="p-4 rounded-lg" :style="`color: ${textColor}; background-color: ${bgColor}; font-size: ${fontSize}px; font-weight: ${fontWeight};`" x-text="sampleText"></p>
-                </div>
-            </div>
-
-            <div class="bg-white rounded-xl border border-gray-200 p-6 flex flex-col justify-between shadow-sm">
-                <div>
-                    <h2 class="font-bold text-lg mb-4">Suggested Text</h2>
-                    <p class="text-sm text-gray-500 mb-4">A contrast-compliant version using current background.</p>
-                    <div class="flex items-center space-x-2">
-                        <div class="size-4 rounded border" :style="`background-color: ${suggestedText}`"></div>
-                        <span class="font-mono text-xs" x-text="suggestedText"></span>
-                    </div>
-                </div>
-                <div class="mt-8 pt-6 border-t border-gray-100">
-                    <p class="p-4 rounded-lg" :style="`color: ${suggestedText}; background-color: ${bgColor}; font-size: ${fontSize}px; font-weight: ${fontWeight};`" x-text="sampleText"></p>
-                </div>
-            </div>
-
-            <div class="bg-white rounded-xl border border-gray-200 p-6 flex flex-col justify-between shadow-sm">
-                <div>
-                    <h2 class="font-bold text-lg mb-4">Share</h2>
-                    <p class="text-sm text-gray-500 mb-6">Copy current configuration as a URL for sharing.</p>
-                    <button @click="copyUrl" type="button" :disabled="copying" class="w-full flex items-center justify-center space-x-2 py-3 px-4 bg-gray-900 text-white rounded-lg hover:bg-gray-800 disabled:bg-gray-800 transition-all active:scale-95">
-                        <span x-text="copying ? 'Copied!' : 'Copy Share Link'"></span>
-                    </button>
-                </div>
-                <div class="mt-8 text-[10px] text-gray-400 leading-relaxed uppercase tracking-wider font-bold">
-                    WCAG 2.1 Contrast standard (1.4.3)
-                </div>
-            </div>
-
-        </div>
+        </main>
     </div>
 </body>
 
