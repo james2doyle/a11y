@@ -11,11 +11,13 @@ Open the project on [GitHub Pages](https://james2doyle.github.io/a11y).
 Run the following commands:
 
 Install dependencies once:
+
 ```bash
 npm install
 ```
 
 Start the development server:
+
 ```bash
 npm run dev
 ```
